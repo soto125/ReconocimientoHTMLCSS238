@@ -1,0 +1,2550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Animada</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background: linear-gradient(to right, #b7babd, #c995c0);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        nav {
+            background-color: #96467b;
+            padding: 1rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #5bdb34;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+       
+        .card:nth-child(1) {
+            background: linear-gradient(135deg, #fff 50%, #ffecec 100%);
+            border-left: 5px solid #253683;
+        }
+        .card:nth-child(1):hover {
+            transform: rotate(2deg) scale(1.02);
+            box-shadow: 0 8px 15px rgba(12, 56, 52, 0.3);
+        }
+
+        .card:nth-child(2) {
+            background: linear-gradient(135deg, #fff 50%, #e8f4ff 100%);
+            border-top: 5px solid #4facfe;
+        }
+        .card:nth-child(2):hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 20px rgba(118, 68, 141, 0.3);
+        }
+
+        .card:nth-child(3) {
+            background: linear-gradient(135deg, #fff 50%, #fff0e5 100%);
+            border-right: 5px solid #5dc21a;
+        }
+        .card:nth-child(3):hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(255, 140, 0, 0.3);
+        }
+
+        .card:nth-child(4) {
+            background: linear-gradient(135deg, #fff 50%, #f0fff0 100%);
+            border-bottom: 5px solid #50c878;
+        }
+        .card:nth-child(4):hover {
+            transform: rotate(-2deg) scale(1.02);
+            box-shadow: 0 8px 15px rgba(80, 200, 120, 0.3);
+        }
+
+        .card:nth-child(5) {
+            background: linear-gradient(135deg, #fff 50%, #f5e6ff 100%);
+            border: 2px dashed #9b59b6;
+        }
+        .card:nth-child(5):hover {
+            transform: translateX(10px);
+            box-shadow: -8px 8px 15px rgba(155, 89, 182, 0.3);
+        }
+
+        .card:nth-child(6) {
+            background: linear-gradient(135deg, #fff 50%, #ffe6e6 100%);
+            border-radius: 20px 0 20px 0;
+        }
+        .card:nth-child(6):hover {
+            transform: skew(-2deg, 2deg);
+            box-shadow: 0 8px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .card:nth-child(7) {
+            background: linear-gradient(135deg, #fff 50%, #e6ffe6 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 95%, 95% 100%, 0 100%);
+        }
+        .card:nth-child(7):hover {
+            transform: perspective(1000px) rotateX(5deg);
+            box-shadow: 0 15px 20px rgba(46, 204, 113, 0.3);
+        }
+
+        .card:nth-child(8) {
+            background: linear-gradient(135deg, #fff 50%, #fff3e6 100%);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+        .card:nth-child(8):hover {
+            border-color: #f39c12;
+            transform: translateY(-10px) translateX(-10px);
+            box-shadow: 10px 10px 0 rgba(243, 156, 18, 0.3);
+        }
+
+        .card:nth-child(9) {
+            background: linear-gradient(135deg, #fff 50%, #e6f3ff 100%);
+            position: relative;
+        }
+        .card:nth-child(9)::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 48%, #3498db 49%, #3498db 51%, transparent 52%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1;
+        }
+        .card:nth-child(9):hover::before {
+            opacity: 0.1;
+        }
+        .card:nth-child(9):hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 15px rgba(52, 152, 219, 0.3);
+        }
+
+       
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            transition: all 0.4s ease;
+        }
+
+        .card:hover img {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+       
+        .card:nth-child(1) h2 { color: #ff6b6b; }
+        .card:nth-child(2) h2 { color: #4facfe; }
+        .card:nth-child(3) h2 { color: #ff8c00; }
+        .card:nth-child(4) h2 { color: #50c878; }
+        .card:nth-child(5) h2 { color: #9b59b6; }
+        .card:nth-child(6) h2 { color: #e74c3c; }
+        .card:nth-child(7) h2 { color: #2ecc71; }
+        .card:nth-child(8) h2 { color: #f39c12; }
+        .card:nth-child(9) h2 { color: #3498db; }
+
+       
+        .button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .card:nth-child(1) .button { background-color: #ff6b6b; }
+        .card:nth-child(2) .button { background-color: #4facfe; }
+        .card:nth-child(3) .button { background-color: #ff8c00; }
+        .card:nth-child(4) .button { background-color: #50c878; }
+        .card:nth-child(5) .button { background-color: #9b59b6; }
+        .card:nth-child(6) .button { background-color: #e74c3c; }
+        .card:nth-child(7) .button { background-color: #2ecc71; }
+        .card:nth-child(8) .button { background-color: #f39c12; }
+        .card:nth-child(9) .button { background-color: #3498db; }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+
+       
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 1rem;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #3498db;
+        }
+
+       
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+       
+        .card:nth-child(10) {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+}
+.card:nth-child(10):hover {
+    transform: translateY(-10px) rotateX(10deg);
+    box-shadow: 0 15px 25px rgba(72, 219, 251, 0.3);
+    background: rgba(255, 255, 255, 0.8);
+}
+.card:nth-child(10) h2 { color: #48dbfb; }
+.card:nth-child(10) .button { background-color: #48dbfb; }
+
+
+.card:nth-child(11) {
+    background: linear-gradient(135deg, #fff 50%, #ffe6f2 100%);
+    border-radius: 30px 0 30px 0;
+    animation: wave 3s infinite;
+}
+@keyframes wave {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+.card:nth-child(11):hover {
+    animation: none;
+    transform: scale(1.03) rotate(3deg);
+    box-shadow: 0 10px 20px rgba(236, 64, 122, 0.3);
+}
+.card:nth-child(11) h2 { color: #ec407a; }
+.card:nth-child(11) .button { background-color: #ec407a; }
+
+
+.card:nth-child(12) {
+    background: linear-gradient(135deg, #fff 50%, #e6ffe6 100%);
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+}
+.card:nth-child(12)::before {
+    content: '';
+    position: absolute;
+    top: -3px; right: -3px; bottom: -3px; left: -3px;
+    background: linear-gradient(45deg, #00b894, #00cec9);
+    z-index: -1;
+    border-radius: 12px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.card:nth-child(12):hover::before {
+    opacity: 1;
+}
+.card:nth-child(12):hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 15px rgba(0, 184, 148, 0.3);
+}
+.card:nth-child(12) h2 { color: #00b894; }
+.card:nth-child(12) .button { background-color: #00b894; }
+
+
+.card:nth-child(13) {
+    background: linear-gradient(135deg, #fff 50%, #fff0f5 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 15% 100%, 0 85%);
+}
+.card:nth-child(13):hover {
+    transform: perspective(1000px) rotateY(-10deg);
+    box-shadow: 20px 8px 15px rgba(255, 88, 88, 0.3);
+}
+.card:nth-child(13) h2 { color: #ff5858; }
+.card:nth-child(13) .button { background-color: #ff5858; }
+
+.card:nth-child(14) {
+    background: linear-gradient(135deg, #fff 50%, #f5f0ff 100%);
+    border: 2px solid #a55eea;
+    position: relative;
+}
+.card:nth-child(14)::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid #a55eea;
+    filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.card:nth-child(14):hover::after {
+    opacity: 1;
+}
+.card:nth-child(14):hover {
+    transform: translateX(-5px) translateY(-5px);
+    box-shadow: 5px 5px 0 #a55eea;
+}
+.card:nth-child(14) h2 { color: #a55eea; }
+.card:nth-child(14) .button { background-color: #a55eea; }
+
+
+.card:nth-child(15) {
+    background: linear-gradient(135deg, #fff 50%, #fff8e1 100%);
+    transition: all 0.5s ease;
+    border-left: 4px solid #ffd700;
+}
+.card:nth-child(15):hover {
+    transform-origin: left;
+    transform: perspective(1500px) rotateY(10deg);
+    box-shadow: -10px 10px 20px rgba(255, 215, 0, 0.3);
+}
+.card:nth-child(15) h2 { color: #ffd700; }
+.card:nth-child(15) .button { background-color: #ffd700; }
+
+
+.card:nth-child(16) {
+    background: linear-gradient(135deg, #fff 50%, #f0f7ff 100%);
+    position: relative;
+    overflow: hidden;
+}
+.card:nth-child(16)::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 0%,
+        rgba(72, 198, 239, 0.1) 50%,
+        transparent 100%
+    );
+    animation: prism-rotate 3s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+@keyframes prism-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+.card:nth-child(16):hover::before {
+    opacity: 1;
+}
+.card:nth-child(16):hover {
+    transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
+    box-shadow: 0 15px 30px rgba(72, 198, 239, 0.3);
+}
+.card:nth-child(16) h2 { color: #48c6ef; }
+.card:nth-child(16) .button { background-color: #48c6ef; }
+
+.card:nth-child(17) {
+    background: linear-gradient(135deg, #fff 50%, #fff5f5 100%);
+    border: 2px solid transparent;
+    position: relative;
+    z-index: 1;
+}
+.card:nth-child(17)::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, #ff6b95, #ffc796);
+    z-index: -1;
+    transition: opacity 0.3s;
+    opacity: 0;
+    filter: blur(5px);
+}
+.card:nth-child(17):hover {
+    border-color: transparent;
+    transform: scale(1.03);
+}
+.card:nth-child(17):hover::before {
+    opacity: 1;
+}
+.card:nth-child(17) h2 { color: #ff6b95; }
+.card:nth-child(17) .button { background-color: #ff6b95; }
+
+.card:nth-child(18) {
+    background: linear-gradient(135deg, #fff 50%, #f0fff4 100%);
+    position: relative;
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% 85%,
+        95% 85%,
+        90% 100%,
+        85% 85%,
+        0 85%
+    );
+}
+.card:nth-child(18)::after {
+    content: '';
+    position: absolute;
+    bottom: 15%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 5px,
+        #6dd5b4 5px,
+        #6dd5b4 10px
+    );
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.card:nth-child(18):hover {
+    transform: translateY(-10px) rotate(-2deg);
+    box-shadow: 0 20px 30px rgba(109, 213, 180, 0.2);
+}
+.card:nth-child(18):hover::after {
+    opacity: 1;
+}
+.card:nth-child(18) h2 { color: #6dd5b4; }
+.card:nth-child(18) .button { background-color: #6dd5b4; }
+
+
+.card:nth-child(19) {
+    background: linear-gradient(135deg, #fff 50%, #f5f0ff 100%);
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+}
+.card:nth-child(19)::before {
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    background: linear-gradient(
+        transparent,
+        rgba(191, 123, 255, 0.2)
+    );
+    top: -100%;
+    left: -25%;
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+}
+.card:nth-child(19):hover::before {
+    top: 100%;
+}
+.card:nth-child(19):hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(191, 123, 255, 0.3);
+}
+.card:nth-child(19) h2 { color: #bf7bff; }
+.card:nth-child(19) .button { background-color: #bf7bff; }
+
+
+.card:nth-child(20) {
+    background: linear-gradient(135deg, #fff 50%, #fff8e1 100%);
+    border-left: 15px solid #ffd93d;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+.card:nth-child(20)::before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 0;
+    height: 100%;
+    width: 15px;
+    background: linear-gradient(
+        to bottom,
+        #ffd93d,
+        #ffb940
+    );
+    transition: all 0.4s ease;
+}
+.card:nth-child(20):hover {
+    border-left-width: 5px;
+    transform: translateX(10px);
+    box-shadow: -10px 10px 20px rgba(255, 217, 61, 0.3);
+}
+.card:nth-child(20):hover::before {
+    transform: skewY(45deg);
+}
+.card:nth-child(20) h2 { color: #ffd93d; }
+.card:nth-child(20) .button { background-color: #ffd93d;
+}
+
+.card:nth-child(21) {
+    background: linear-gradient(135deg, #fff 50%, #f0f8ff 100%);
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    border: 1px solid rgba(123, 174, 255, 0.2);
+}
+
+.card:nth-child(21)::before,
+.card:nth-child(21)::after {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(123, 174, 255, 0.1) 40%,
+        rgba(123, 174, 255, 0.2) 50%,
+        rgba(123, 174, 255, 0.1) 60%,
+        transparent 70%
+    );
+    animation: kaleidoscope 8s linear infinite;
+    pointer-events: none;
+}
+
+.card:nth-child(21)::after {
+    animation-duration: 12s;
+    animation-direction: reverse;
+    background: linear-gradient(
+        -45deg,
+        transparent 30%,
+        rgba(255, 123, 234, 0.1) 40%,
+        rgba(255, 123, 234, 0.2) 50%,
+        rgba(255, 123, 234, 0.1) 60%,
+        transparent 70%
+    );
+}
+
+@keyframes kaleidoscope {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.2);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+.card:nth-child(21):hover {
+    transform: perspective(1000px) rotateX(10deg) rotateY(-10deg);
+    box-shadow:
+        20px 20px 30px rgba(123, 174, 255, 0.2),
+        inset 0 0 20px rgba(123, 174, 255, 0.1);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card:nth-child(21):hover::before {
+    animation-duration: 4s;
+}
+
+.card:nth-child(21):hover::after {
+    animation-duration: 6s;
+}
+
+.card:nth-child(21) h2 {
+    color: #7baeff;
+    position: relative;
+    z-index: 1;
+}
+
+.card:nth-child(21) .button {
+    background: linear-gradient(45deg, #7baeff, #ff7bea);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.card:nth-child(21) .button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(123, 174, 255, 0.4);
+}
+
+.card:nth-child(21) img {
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    z-index: 1;
+}
+
+.card:nth-child(21):hover img {
+    transform: scale(1.05) translateY(-5px);
+    filter: brightness(1.1) contrast(1.1);
+}
+
+    </style>
+</head>
+<body>
+   
+    <header>
+        <h1>Taller HTML y CSS</h1>
+        <p>Etiquetas, estilos y animaciones</p>
+    </header>
+   
+          <main>
+              <div class="card">
+                  <h2>Tarjeta con Rotación</h2>
+                  <p>Esta tarjeta tiene un gradiente de blanco a rosa suave, un borde izquierdo rojo, y al pasar el mouse gira 2 grados y se escala ligeramente. También tiene una sombra rosa al hacer hover.</p>
+                  <a href="#" class="button">Ver efecto</a>
+              </div>
+     
+              <div class="card">
+                  <h2>Elevación Suave</h2>
+                  <p>Presenta un gradiente azul claro, borde superior azul, y al pasar el mouse se eleva 15px con una transición suave. Incluye una sombra azul que enfatiza la elevación.</p>
+                  <a href="#" class="button">Ver efecto</a>
+              </div>
+     
+              <div class="card">
+                  <h2>Escala Naranja</h2>
+                  <p>Tiene un gradiente naranja suave, borde derecho naranja, y al hacer hover se escala a 1.05 de su tamaño original con una sombra naranja que acentúa el efecto.</p>
+                  <a href="#" class="button">Ver efecto</a>
+              </div>
+     
+              <div class="card">
+                  <h2>Rotación Verde</h2>
+                  <p>Combina un gradiente verde claro con un borde inferior verde. Al pasar el mouse, rota -2 grados y se escala, creando un efecto dinámico con sombra verde.</p>
+                  <a href="#" class="button">Ver efecto</a>
+              </div>
+     
+              <div class="card">
+                  <h2>Deslizamiento Lateral</h2>
+                  <p>Diseñada con un gradiente púrpura suave y borde punteado. Al hacer hover, se desliza hacia la derecha y proyecta una sombra hacia la izquierda en tono púrpura.</p>
+                  <a href="#" class="button">Ver efecto</a>
+              </div>
+     
+              <div class="card">
+                  <h2>Transformación Sesgada</h2>
+                  <p>Tiene bordes redondeados asimétricos y un gradiente rojo suave. Al pasar el mouse, se sesga en ambos ejes creando una perspectiva única con sombra roja.</p>
+                  <a href="#" class="button">Ver efecto</a>
+              </div>
+     
+              <div class="card">
+                  <h2>Efecto Perspectiva</h2>
+                  <p>Usa clip-path para crear una esquina cortada y gradiente verde. Al hacer hover, rota en el eje X creando un efecto de perspectiva 3D con sombra verde.</p>
+                  <a href="#" class="button">Ver efecto</a>
+              </div>
+     
+              <div class="card">
+                  <h2>Borde Animado</h2>
+                  <p>Tiene un gradiente naranja suave y borde transparente que se vuelve naranja al hacer hover. Se mueve diagonalmente y proyecta una sombra sólida naranja.</p>
+                  <a href="#" class="button">Ver efecto</a>
+              </div>
+     
+              <div class="card">
+                  <h2>Línea Diagonal</h2>
+                  <p>Presenta un gradiente azul suave y un efecto único: al hacer hover aparece una línea diagonal semitransparente que cruza la tarjeta, además de escalar y proyectar sombra.</p>
+                  <a href="#" class="button">Ver efecto</a>
+              </div>
+              <div class="card">
+                <h2>Efecto Cristal</h2>
+                <p>Esta tarjeta simula un efecto de cristal esmerilado con fondo semitransparente y efecto blur. Al hacer hover, se eleva y rota en el eje X.</p>
+                <a href="#" class="button">Ver efecto</a>
+            </div>
+           
+            <div class="card">
+                <h2>Efecto Ondulado</h2>
+                <p>Presenta una animación constante de ondulación que se detiene al hacer hover, transformándose en una rotación suave con escala.</p>
+                <a href="#" class="button">Ver efecto</a>
+            </div>
+           
+            <div class="card">
+                <h2>Marco Brillante</h2>
+                <p>Al pasar el mouse, aparece un borde brillante con degradado que enmarca la tarjeta, combinado con un suave efecto de escala.</p>
+                <a href="#" class="button">Ver efecto</a>
+            </div>
+           
+            <div class="card">
+                <h2>Efecto Origami</h2>
+                <p>Diseñada con una esquina doblada mediante clip-path. Al hacer hover, rota en perspectiva como si fuera papel.</p>
+                <a href="#" class="button">Ver efecto</a>
+            </div>
+           
+            <div class="card">
+                <h2>Efecto Neón</h2>
+                <p>Cuenta con un borde que brilla como neón al hacer hover, combinado con un desplazamiento y sombra sólida.</p>
+                <a href="#" class="button">Ver efecto</a>
+            </div>
+           
+            <div class="card">
+                <h2>Efecto Acordeón</h2>
+                <p>Al pasar el mouse, la tarjeta se despliega como un acordeón con una rotación en perspectiva desde el borde izquierdo.</p>
+                <a href="#" class="button">Ver efecto</a>
+            </div>
+
+            <div class="card">
+              <h2>Efecto Prisma</h2>
+              <p>Un efecto prismático rotatorio aparece al hacer hover, creando la ilusión de reflejos de cristal en movimiento sobre la tarjeta.</p>
+              <a href="#" class="button">Ver efecto</a>
+          </div>
+         
+          <div class="card">
+              <h2>Explosión de Color</h2>
+              <p>Al pasar el mouse, la tarjeta se ilumina con un degradado vibrante que parece emerger desde dentro, creando un efecto de explosión de color.</p>
+              <a href="#" class="button">Ver efecto</a>
+          </div>
+         
+          <div class="card">
+              <h2>Papel Rasgado</h2>
+              <p>Simula un papel rasgado en la parte inferior, con un patrón de líneas punteadas que aparece al hacer hover, como si fuera una hoja de cuaderno.</p>
+              <a href="#" class="button">Ver efecto</a>
+          </div>
+         
+          <div class="card">
+              <h2>Espejo Líquido</h2>
+              <p>Un efecto de reflejo líquido que se desliza sobre la tarjeta al hacer hover, creando una sensación de profundidad y movimiento.</p>
+              <a href="#" class="button">Ver efecto</a>
+          </div>
+         
+          <div class="card">
+              <h2>Portafolio</h2>
+              <p>Inspirada en un portafolio de artista, con un borde grueso que se transforma y se inclina al pasar el mouse sobre la tarjeta.</p>
+              <a href="#" class="button">Ver efecto</a>
+          </div>
+       
+        <div class="card">
+          <h2>Caleidoscopio Interactivo</h2>
+          <p>Una experiencia visual única que combina patrones geométricos giratorios, efectos de profundidad y brillos dinámicos que reaccionan al movimiento del cursor.</p>
+          <a href="#" class="button">Ver efecto</a>
+      </div>
+
+          </main>
+    <footer>
+         
+```
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etiquetas</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            padding: 30px;
+            color: #333;
+        }
+
+        h1 {
+            width: 100%;
+            text-align: center;
+            font-size: 2.5rem;
+            color: #4a4e69;
+            margin-bottom: 40px;
+            font-weight: bold;
+            font-family: 'Arial', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 3px solid #9a8c98;
+            padding-bottom: 10px;
+        }
+
+        /* Grid Container for Boxes */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Dos columnas */
+            gap: 20px;
+            width: 100%;
+            max-width: 900px; /* Ajuste de ancho máximo */
+        }
+
+        /* Estilo de los cuadros */
+        .box {
+            padding: 25px;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #fff;
+            background-color: #6b705c;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Estilos específicos para cada efecto */
+        .ease-in {
+            transition-timing-function: ease-in;
+            transition: transform 0.5s;
+        }
+        .ease-in:hover {
+            transform: scale(1.1);
+        }
+        .yellow-bg {
+            background-color: #ffdd57;
+            color: #333;
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+        }
+        .pink-border {
+            border: 3px solid #ffadad;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .underline {
+            text-decoration: underline;
+        }
+        .uppercase {
+            text-transform: uppercase;
+        }
+        .box-shadow {
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+        }
+        .opacity {
+            opacity: 0.75;
+        }
+        .font-roboto {
+            font-family: 'Roboto', sans-serif;
+        }
+        .small-font {
+            font-size: 0.85rem;
+        }
+        .font-weight {
+            font-weight: 700;
+        }
+        .italic {
+            font-style: italic;
+        }
+        .text-ellipsis {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .underline-yellow {
+            text-decoration: underline;
+            text-decoration-color: yellow;
+        }
+        .underline-dotted {
+            text-decoration-style: dotted;
+        }
+        .underline-thick {
+            text-decoration-thickness: 3px;
+        }
+        .align-last-right {
+            text-align-last: right;
+        }
+        .justify-text {
+            text-align: justify;
+        }
+        .line-break {
+            line-break: anywhere;
+        }
+        .word-break {
+            word-break: break-all;
+        }
+        .rotate {
+            transform: rotate(45deg);
+            background-color: #b5838d;
+        }
+        .width-transition {
+            transition: width 2s;
+        }
+        .width-transition:hover {
+            width: 100%;
+        }
+        .bg-transition {
+            transition-property: background-color;
+        }
+        .bg-transition:hover {
+            background-color: #6d6875;
+        }
+        .transition-delay {
+            transition: background-color 0.5s ease;
+            transition-delay: 0.2s;
+        }
+        .transition-delay:hover {
+            background-color: #ffb4a2;
+        }
+        .spin-animation {
+            animation: spin 2s linear infinite;
+            background-color: #c9ada7;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0); }
+            100% { transform: rotate(360deg); }
+        }
+        .short-duration {
+            animation-duration: 0.3s;
+        }
+        .animation-delay {
+            animation: spin 2s linear infinite;
+            animation-delay: 0.5s;
+        }
+        .infinite-animation {
+            animation: bounce 1s infinite;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        .alternate-animation {
+            animation: slide 2s alternate infinite;
+        }
+        @keyframes slide {
+            from { transform: translateX(0); }
+            to { transform: translateX(30px); }
+        }
+        .fill-mode-animation {
+            animation: fadeIn 1s forwards;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .paused-animation {
+            animation: spin 2s linear paused;
+        }
+        .transform-origin {
+            transform: rotate(45deg);
+            transform-origin: center;
+            background-color: #b5838d;
+        }
+        .scale {
+            transform: scale(1.5);
+        }
+        .rotate-90 {
+            transform: rotate(90deg);
+        }
+        .skewX {
+            transform: skewX(6deg);
+        }
+        .translateX {
+            transform: translateX(-4px);
+        }
+        .perspective {
+            perspective: 500px;
+            transform: rotateY(20deg);
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+            animation: spin 2s infinite;
+        }
+        .border-radius {
+            border-radius: 8px;
+        }
+        .border-width {
+            border: 4px solid #ffadad;
+        }
+        .border-style {
+            border: 2px dashed #ffb4a2;
+        }
+        .border-collapse {
+            display: table;
+            border-collapse: collapse;
+        }
+        .border-spacing {
+            display: table;
+            border-spacing: 10px;
+        }
+        .outline-none {
+            outline: none;
+        }
+        .overflow-hidden {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .overflow-x-hidden {
+            overflow-x: hidden;
+        }
+        .overflow-y-hidden {
+            overflow-y: hidden;
+            height: 50px;
+        }
+        .z-index {
+            position: relative;
+            z-index: 10;
+            background-color: #ff6b6b;
+        }
+        .pointer-events-none {
+            pointer-events: none;
+        }
+        .resize-none {
+            resize: none;
+            overflow: hidden;
+        }
+        .cursor-pointer {
+            cursor: pointer;
+        }
+        .user-select-none {
+            user-select: none;
+        }
+        .filter-grayscale {
+            filter: grayscale(50%);
+        }
+        .backdrop-blur {
+            backdrop-filter: blur(10px);
+            background-color: rgba(107, 112, 92, 0.5);
+        }
+        .blend-screen {
+            background-color: #fcbf49;
+            mix-blend-mode: screen;
+        }
+        .clip-path {
+            clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+        }
+        .will-change {
+            will-change: transform;
+            transition: transform 0.3s ease-in-out;
+        }
+        .isolation-isolate {
+            isolation: isolate;
+            background-color: #6d6875;
+        }
+
+        /* Nuevas etiquetas */
+        .shape-outside {
+            shape-outside: circle(50%);
+            float: left;
+            width: 150px;
+            height: 150px;
+            background-color: #8d99ae;
+            border-radius: 50%;
+        }
+        .margin {
+            margin: 16px;
+            background-color: #ff6b6b;
+        }
+        .margin-top {
+            margin-top: 32px;
+            background-color: #fcbf49;
+        }
+        .margin-right {
+            margin-right: 48px;
+            background-color: #6b705c;
+        }
+        .margin-bottom {
+            margin-bottom: 64px;
+            background-color: #b5838d;
+        }
+        .margin-left {
+            margin-left: 80px;
+            background-color: #c9ada7;
+        }
+        .padding {
+            padding: 16px;
+            background-color: #f4f4f9;
+        }
+        .padding-top {
+            padding-top: 12px;
+            background-color: #d4a5a5;
+        }
+        .padding-right {
+            padding-right: 18px;
+            background-color: #6b705c;
+        }
+        .padding-bottom {
+            padding-bottom: 24px;
+            background-color: #fcbf49;
+        }
+        .padding-left {
+            padding-left: 30px;
+            background-color: #ffdd57;
+        }
+        .width-100 {
+            width: 100%;
+            background-color: #ff6b6b;
+        }
+        .height-150 {
+            height: 150px;
+            background-color: #6b705c;
+        }
+        .min-width {
+            min-width: 200px;
+            background-color: #f4f4f9;
+        }
+        .max-width {
+            max-width: 500px;
+            background-color: #fcbf49;
+        }
+        .min-height {
+            min-height: 100px;
+            background-color: #ffadad;
+        }
+        .max-height {
+            max-height: 400px;
+            background-color: #b5838d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Etiquetas CSS</h1>
+    <div class="grid-container">
+        <!-- Box 1 -->
+        <div class="box ease-in">Transition with ease-in</div>
+        <div class="box yellow-bg">Yellow Background Box</div>
+
+        <!-- Box 2 -->
+        <div class="box text-shadow">Text Shadow Effect</div>
+        <div class="box pink-border">Pink Border Box</div>
+
+        <!-- Box 3 -->
+        <div class="box text-right">Right-aligned Text</div>
+        <div class="box underline">Underlined Text</div>
+
+        <!-- Box 4 -->
+        <div class="box uppercase">Uppercase Text</div>
+        <div class="box box-shadow">Box with Shadow</div>
+
+        <!-- Box 5 -->
+        <div class="box opacity">Box with Opacity</div>
+        <div class="box font-roboto">Roboto Font</div>
+
+        <!-- Box 6 -->
+        <div class="box small-font">Small Font</div>
+        <div class="box font-weight">Bold Font Weight</div>
+
+        <!-- Box 7 -->
+        <div class="box italic">Italic Text</div>
+        <div class="box text-ellipsis">Text Ellipsis Overflow</div>
+
+        <!-- Box 8 -->
+        <div class="box underline-yellow">Underlined Yellow Text</div>
+        <div class="box underline-dotted">Dotted Underlined Text</div>
+
+        <!-- Box 9 -->
+        <div class="box underline-thick">Thick Underlined Text</div>
+        <div class="box align-last-right">Right-aligned Last Line</div>
+
+        <!-- Box 10 -->
+        <div class="box justify-text">Justified Text</div>
+        <div class="box line-break">Line Break Text</div>
+
+        <!-- Box 11 -->
+        <div class="box word-break">Word Break Effect</div>
+        <div class="box rotate">Rotated Box</div>
+
+        <!-- Box 12 -->
+        <div class="box width-transition">Width Transition on Hover</div>
+        <div class="box bg-transition">Background Color Transition</div>
+
+        <!-- Box 13 -->
+        <div class="box transition-delay">Transition Delay</div>
+        <div class="box spin-animation">Spin Animation</div>
+
+        <!-- Box 14 -->
+        <div class="box short-duration">Short Duration Animation</div>
+        <div class="box animation-delay">Animation Delay</div>
+
+        <!-- Box 15 -->
+        <div class="box infinite-animation">Infinite Animation</div>
+        <div class="box alternate-animation">Alternate Animation</div>
+
+        <!-- Box 16 -->
+        <div class="box fill-mode-animation">Fill Mode Animation</div>
+        <div class="box paused-animation">Paused Animation</div>
+
+        <!-- Box 17 -->
+        <div class="box transform-origin">Transform Origin</div>
+        <div class="box scale">Scale Transformation</div>
+
+        <!-- Box 18 -->
+        <div class="box rotate-90">90° Rotation</div>
+        <div class="box skewX">Skewed Box</div>
+
+        <!-- Box 19 -->
+        <div class="box translateX">Translated Box</div>
+        <div class="box perspective">Perspective Box</div>
+
+        <!-- Box 20 -->
+        <div class="box backface-hidden">Backface Hidden</div>
+        <div class="box border-radius">Border Radius</div>
+
+        <!-- Box 21 -->
+        <div class="box border-width">Border Width</div>
+        <div class="box border-style">Border Style</div>
+
+        <!-- Box 22 -->
+        <div class="box border-collapse">Border Collapse</div>
+        <div class="box border-spacing">Border Spacing</div>
+
+        <!-- Box 23 -->
+        <div class="box outline-none">No Outline</div>
+        <div class="box overflow-hidden">Overflow Hidden</div>
+
+        <!-- Box 24 -->
+        <div class="box overflow-x-hidden">Overflow X Hidden</div>
+        <div class="box overflow-y-hidden">Overflow Y Hidden</div>
+
+        <!-- Box 25 -->
+        <div class="box z-index">Z-index</div>
+        <div class="box pointer-events-none">Pointer Events None</div>
+
+        <!-- Box 26 -->
+        <div class="box resize-none">Resize None</div>
+        <div class="box cursor-pointer">Cursor Pointer</div>
+
+        <!-- Box 27 -->
+        <div class="box user-select-none">User Select None</div>
+        <div class="box filter-grayscale">Grayscale Filter</div>
+
+        <!-- Box 28 -->
+        <div class="box backdrop-blur">Backdrop Blur</div>
+        <div class="box blend-screen">Blend Mode Screen</div>
+
+        <!-- Box 29 -->
+        <div class="box clip-path">Clip Path</div>
+        <div class="box will-change">Will Change</div>
+
+        <!-- Box 30 -->
+        <div class="box isolation-isolate">Isolation Isolate</div>
+        <div class="box shape-outside">Shape Outside</div>
+
+        <!-- Box 31 -->
+        <div class="box margin">Margin</div>
+        <div class="box margin-top">Margin Top</div>
+
+        <!-- Box 32 -->
+        <div class="box margin-right">Margin Right</div>
+        <div class="box margin-bottom">Margin Bottom</div>
+
+        <!-- Box 33 -->
+        <div class="box margin-left">Margin Left</div>
+        <div class="box padding">Padding</div>
+
+        <!-- Box 34 -->
+        <div class="box padding-top">Padding Top</div>
+        <div class="box padding-right">Padding Right</div>
+
+        <!-- Box 35 -->
+        <div class="box padding-bottom">Padding Bottom</div>
+        <div class="box padding-left">Padding Left</div>
+
+        <!-- Box 36 -->
+        <div class="box width-100">Width 100%</div>
+        <div class="box height-150">Height 150px</div>
+
+        <!-- Box 37 -->
+        <div class="box min-width">Min Width 200px</div>
+        <div class="box max-width">Max Width 500px</div>
+
+        <!-- Box 38 -->
+        <div class="box min-height">Min Height 100px</div>
+        <div class="box max-height">Max Height 400px</div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+Etiquetas CSS de Grid y Animaciones
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etiquetas CSS de Grid y Animaciones</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            color: #333;
+        }
+
+        h1 {
+            width: 100%;
+            text-align: center;
+            font-size: 2.5rem;
+            color: #4a4e69;
+            margin-bottom: 40px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 3px solid #9a8c98;
+            padding-bottom: 10px;
+        }
+
+        /* Grid Container for Boxes */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr)); /* Cuatro columnas */
+            grid-template-rows: repeat(3, minmax(0, 1fr));  /* Tres filas */
+            gap: 16px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        /* Estilo de los cuadros */
+        .box {
+            padding: 25px;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #fff;
+            background-color: #6b705c;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Animaciones */
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(-25%);
+            }
+            50% {
+                transform: translateY(0%);
+            }
+        }
+
+        /* Estilos adicionales */
+        .spin-animation {
+            animation: spin 2s linear infinite;
+            background-color: #c9ada7;
+        }
+
+        .bounce-animation {
+            animation: bounce 2s infinite;
+            background-color: #ffadad;
+        }
+
+        .border {
+            border: 1px solid #000000;
+        }
+
+        .border-top {
+            border-top: 2px solid #000000;
+        }
+
+        .border-right {
+            border-right: 4px solid #000000;
+        }
+
+        .border-left {
+            border-left: 1px solid #000000;
+        }
+
+        .border-bottom {
+            border-bottom: 1px solid #000000;
+        }
+
+        .border-yellow {
+            border: 1px solid rgba(255, 255, 0, 0.6);
+        }
+
+        .border-dashed {
+            border-style: dashed;
+        }
+
+        .border-color {
+            border-color: rgba(0, 0, 0, 0.75);
+        }
+
+        .backdrop-filter {
+            backdrop-filter: blur(10px);
+            background-color: rgba(107, 112, 92, 0.5);
+        }
+
+        /* Nuevas etiquetas */
+        .element {
+            grid-auto-columns: auto;
+            grid-auto-rows: auto;
+            justify-self: center;
+            grid-auto-flow: column;
+            place-content: center;
+            place-items: center;
+            gap: 16px;
+            justify-items: center;
+        }
+
+        .element > * {
+            border-top-width: 2px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Etiquetas CSS de Grid y Animaciones</h1>
+    <div class="grid-container">
+        <!-- Box 1 -->
+        <div class="box spin-animation">Spin Animation</div>
+        <div class="box bounce-animation">Bounce Animation</div>
+
+        <!-- Box 2 -->
+        <div class="box border">Box with Border</div>
+        <div class="box border-top">Box with Top Border</div>
+
+        <!-- Box 3 -->
+        <div class="box border-right">Box with Right Border</div>
+        <div class="box border-bottom">Box with Bottom Border</div>
+
+        <!-- Box 4 -->
+        <div class="box border-left">Box with Left Border</div>
+        <div class="box border-yellow">Yellow Border Box</div>
+
+        <!-- Box 5 -->
+        <div class="box border-dashed">Dashed Border Box</div>
+        <div class="box border-color">Custom Border Color</div>
+
+        <!-- Box 6 -->
+        <div class="box backdrop-filter">Backdrop Blur</div>
+        <div class="box">Box with Grid Auto Flow</div>
+
+        <!-- Box 7 -->
+        <div class="box">Justified and Centered</div>
+        <div class="box">Grid Template Columns</div>
+
+        <!-- Box 8 -->
+        <div class="box">Grid Template Rows</div>
+        <div class="box">Place Items Centered</div>
+
+        <!-- Box 9 -->
+        <div class="box">Auto Columns Grid</div>
+        <div class="box">Auto Rows Grid</div>
+    </div>
+</body>
+</html>
+
+
+
+
+ETIQUETAS ANTIGUAS:
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etiquetas</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            color: #333;
+        }
+
+        h1 {
+            width: 100%;
+            text-align: center;
+            font-size: 2.5rem;
+            color: #4a4e69;
+            margin-bottom: 40px;
+            font-weight: bold;
+            font-family: 'Arial', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 3px solid #9a8c98;
+            padding-bottom: 10px;
+        }
+
+        /* Grid Container for Boxes */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Dos columnas */
+            gap: 20px;
+            width: 100%;
+            max-width: 900px; /* Ajuste de ancho máximo */
+        }
+
+        /* Estilo de los cuadros */
+        .box {
+            padding: 25px;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #fff;
+            background-color: #6b705c;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Estilos específicos para cada efecto */
+        .ease-in {
+            transition-timing-function: ease-in;
+            transition: transform 0.5s;
+        }
+        .ease-in:hover {
+            transform: scale(1.1);
+        }
+        .yellow-bg {
+            background-color: #ffdd57;
+            color: #333;
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+        }
+        .pink-border {
+            border: 3px solid #ffadad;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .underline {
+            text-decoration: underline;
+        }
+        .uppercase {
+            text-transform: uppercase;
+        }
+        .box-shadow {
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+        }
+        .opacity {
+            opacity: 0.75;
+        }
+        .font-roboto {
+            font-family: 'Roboto', sans-serif;
+        }
+        .small-font {
+            font-size: 0.85rem;
+        }
+        .font-weight {
+            font-weight: 700;
+        }
+        .italic {
+            font-style: italic;
+        }
+        .text-ellipsis {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .underline-yellow {
+            text-decoration: underline;
+            text-decoration-color: yellow;
+        }
+        .underline-dotted {
+            text-decoration-style: dotted;
+        }
+        .underline-thick {
+            text-decoration-thickness: 3px;
+        }
+        .align-last-right {
+            text-align-last: right;
+        }
+        .justify-text {
+            text-align: justify;
+        }
+        .line-break {
+            line-break: anywhere;
+        }
+        .word-break {
+            word-break: break-all;
+        }
+        .rotate {
+            transform: rotate(45deg);
+            background-color: #b5838d;
+        }
+        .width-transition {
+            transition: width 2s;
+        }
+        .width-transition:hover {
+            width: 100%;
+        }
+        .bg-transition {
+            transition-property: background-color;
+        }
+        .bg-transition:hover {
+            background-color: #6d6875;
+        }
+        .transition-delay {
+            transition: background-color 0.5s ease;
+            transition-delay: 0.2s;
+        }
+        .transition-delay:hover {
+            background-color: #ffb4a2;
+        }
+        .spin-animation {
+            animation: spin 2s linear infinite;
+            background-color: #c9ada7;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0); }
+            100% { transform: rotate(360deg); }
+        }
+        .short-duration {
+            animation-duration: 0.3s;
+        }
+        .animation-delay {
+            animation: spin 2s linear infinite;
+            animation-delay: 0.5s;
+        }
+        .infinite-animation {
+            animation: bounce 1s infinite;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        .alternate-animation {
+            animation: slide 2s alternate infinite;
+        }
+        @keyframes slide {
+            from { transform: translateX(0); }
+            to { transform: translateX(30px); }
+        }
+        .fill-mode-animation {
+            animation: fadeIn 1s forwards;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .paused-animation {
+            animation: spin 2s linear paused;
+        }
+        .transform-origin {
+            transform: rotate(45deg);
+            transform-origin: center;
+            background-color: #b5838d;
+        }
+        .scale {
+            transform: scale(1.5);
+        }
+        .rotate-90 {
+            transform: rotate(90deg);
+        }
+        .skewX {
+            transform: skewX(6deg);
+        }
+        .translateX {
+            transform: translateX(-4px);
+        }
+        .perspective {
+            perspective: 500px;
+            transform: rotateY(20deg);
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+            animation: spin 2s infinite;
+        }
+        .border-radius {
+            border-radius: 8px;
+        }
+        .border-width {
+            border: 4px solid #ffadad;
+        }
+        .border-style {
+            border: 2px dashed #ffb4a2;
+        }
+        .border-collapse {
+            display: table;
+            border-collapse: collapse;
+        }
+        .border-spacing {
+            display: table;
+            border-spacing: 10px;
+        }
+        .outline-none {
+            outline: none;
+        }
+        .overflow-hidden {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .overflow-x-hidden {
+            overflow-x: hidden;
+        }
+        .overflow-y-hidden {
+            overflow-y: hidden;
+            height: 50px;
+        }
+        .z-index {
+            position: relative;
+            z-index: 10;
+            background-color: #ff6b6b;
+        }
+        .pointer-events-none {
+            pointer-events: none;
+        }
+        .resize-none {
+            resize: none;
+            overflow: hidden;
+        }
+        .cursor-pointer {
+            cursor: pointer;
+        }
+        .user-select-none {
+            user-select: none;
+        }
+        .filter-grayscale {
+            filter: grayscale(50%);
+        }
+        .backdrop-blur {
+            backdrop-filter: blur(10px);
+            background-color: rgba(107, 112, 92, 0.5);
+        }
+        .blend-screen {
+            background-color: #fcbf49;
+            mix-blend-mode: screen;
+        }
+        .clip-path {
+            clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+        }
+        .will-change {
+            will-change: transform;
+            transition: transform 0.3s ease-in-out;
+        }
+        .isolation-isolate {
+            isolation: isolate;
+            background-color: #6d6875;
+        }
+
+        /* Nuevas etiquetas */
+        .shape-outside {
+            shape-outside: circle(50%);
+            float: left;
+            width: 150px;
+            height: 150px;
+            background-color: #8d99ae;
+            border-radius: 50%;
+        }
+        .margin {
+            margin: 16px;
+            background-color: #ff6b6b;
+        }
+        .margin-top {
+            margin-top: 32px;
+            background-color: #fcbf49;
+        }
+        .margin-right {
+            margin-right: 48px;
+            background-color: #6b705c;
+        }
+        .margin-bottom {
+            margin-bottom: 64px;
+            background-color: #b5838d;
+        }
+        .margin-left {
+            margin-left: 80px;
+            background-color: #c9ada7;
+        }
+        .padding {
+            padding: 16px;
+            background-color: #f4f4f9;
+        }
+        .padding-top {
+            padding-top: 12px;
+            background-color: #d4a5a5;
+        }
+        .padding-right {
+            padding-right: 18px;
+            background-color: #6b705c;
+        }
+        .padding-bottom {
+            padding-bottom: 24px;
+            background-color: #fcbf49;
+        }
+        .padding-left {
+            padding-left: 30px;
+            background-color: #ffdd57;
+        }
+        .width-100 {
+            width: 100%;
+            background-color: #ff6b6b;
+        }
+        .height-150 {
+            height: 150px;
+            background-color: #6b705c;
+        }
+        .min-width {
+            min-width: 200px;
+            background-color: #f4f4f9;
+        }
+        .max-width {
+            max-width: 500px;
+            background-color: #fcbf49;
+        }
+        .min-height {
+            min-height: 100px;
+            background-color: #ffadad;
+        }
+        .max-height {
+            max-height: 400px;
+            background-color: #b5838d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Etiquetas CSS</h1>
+    <div class="grid-container">
+        <!-- Box 1 -->
+        <div class="box ease-in">Transition with ease-in</div>
+        <div class="box yellow-bg">Yellow Background Box</div>
+
+        <!-- Box 2 -->
+        <div class="box text-shadow">Text Shadow Effect</div>
+        <div class="box pink-border">Pink Border Box</div>
+
+        <!-- Box 3 -->
+        <div class="box text-right">Right-aligned Text</div>
+        <div class="box underline">Underlined Text</div>
+
+        <!-- Box 4 -->
+        <div class="box uppercase">Uppercase Text</div>
+        <div class="box box-shadow">Box with Shadow</div>
+
+        <!-- Box 5 -->
+        <div class="box opacity">Box with Opacity</div>
+        <div class="box font-roboto">Roboto Font</div>
+
+        <!-- Box 6 -->
+        <div class="box small-font">Small Font</div>
+        <div class="box font-weight">Bold Font Weight</div>
+
+        <!-- Box 7 -->
+        <div class="box italic">Italic Text</div>
+        <div class="box text-ellipsis">Text Ellipsis Overflow</div>
+
+        <!-- Box 8 -->
+        <div class="box underline-yellow">Underlined Yellow Text</div>
+        <div class="box underline-dotted">Dotted Underlined Text</div>
+
+        <!-- Box 9 -->
+        <div class="box underline-thick">Thick Underlined Text</div>
+        <div class="box align-last-right">Right-aligned Last Line</div>
+
+        <!-- Box 10 -->
+        <div class="box justify-text">Justified Text</div>
+        <div class="box line-break">Line Break Text</div>
+
+        <!-- Box 11 -->
+        <div class="box word-break">Word Break Effect</div>
+        <div class="box rotate">Rotated Box</div>
+
+        <!-- Box 12 -->
+        <div class="box width-transition">Width Transition on Hover</div>
+        <div class="box bg-transition">Background Color Transition</div>
+
+        <!-- Box 13 -->
+        <div class="box transition-delay">Transition Delay</div>
+        <div class="box spin-animation">Spin Animation</div>
+
+        <!-- Box 14 -->
+        <div class="box short-duration">Short Duration Animation</div>
+        <div class="box animation-delay">Animation Delay</div>
+
+        <!-- Box 15 -->
+        <div class="box infinite-animation">Infinite Animation</div>
+        <div class="box alternate-animation">Alternate Animation</div>
+
+        <!-- Box 16 -->
+        <div class="box fill-mode-animation">Fill Mode Animation</div>
+        <div class="box paused-animation">Paused Animation</div>
+
+        <!-- Box 17 -->
+        <div class="box transform-origin">Transform Origin</div>
+        <div class="box scale">Scale Transformation</div>
+
+        <!-- Box 18 -->
+        <div class="box rotate-90">90° Rotation</div>
+        <div class="box skewX">Skewed Box</div>
+
+        <!-- Box 19 -->
+        <div class="box translateX">Translated Box</div>
+        <div class="box perspective">Perspective Box</div>
+
+        <!-- Box 20 -->
+        <div class="box backface-hidden">Backface Hidden</div>
+        <div class="box border-radius">Border Radius</div>
+
+        <!-- Box 21 -->
+        <div class="box border-width">Border Width</div>
+        <div class="box border-style">Border Style</div>
+
+        <!-- Box 22 -->
+        <div class="box border-collapse">Border Collapse</div>
+        <div class="box border-spacing">Border Spacing</div>
+
+        <!-- Box 23 -->
+        <div class="box outline-none">No Outline</div>
+        <div class="box overflow-hidden">Overflow Hidden</div>
+
+        <!-- Box 24 -->
+        <div class="box overflow-x-hidden">Overflow X Hidden</div>
+        <div class="box overflow-y-hidden">Overflow Y Hidden</div>
+
+        <!-- Box 25 -->
+        <div class="box z-index">Z-index</div>
+        <div class="box pointer-events-none">Pointer Events None</div>
+
+        <!-- Box 26 -->
+        <div class="box resize-none">Resize None</div>
+        <div class="box cursor-pointer">Cursor Pointer</div>
+
+        <!-- Box 27 -->
+        <div class="box user-select-none">User Select None</div>
+        <div class="box filter-grayscale">Grayscale Filter</div>
+
+        <!-- Box 28 -->
+        <div class="box backdrop-blur">Backdrop Blur</div>
+        <div class="box blend-screen">Blend Mode Screen</div>
+
+        <!-- Box 29 -->
+        <div class="box clip-path">Clip Path</div>
+        <div class="box will-change">Will Change</div>
+
+        <!-- Box 30 -->
+        <div class="box isolation-isolate">Isolation Isolate</div>
+        <div class="box shape-outside">Shape Outside</div>
+
+        <!-- Box 31 -->
+        <div class="box margin">Margin</div>
+        <div class="box margin-top">Margin Top</div>
+
+        <!-- Box 32 -->
+        <div class="box margin-right">Margin Right</div>
+        <div class="box margin-bottom">Margin Bottom</div>
+
+        <!-- Box 33 -->
+        <div class="box margin-left">Margin Left</div>
+        <div class="box padding">Padding</div>
+
+        <!-- Box 34 -->
+        <div class="box padding-top">Padding Top</div>
+        <div class="box padding-right">Padding Right</div>
+
+        <!-- Box 35 -->
+        <div class="box padding-bottom">Padding Bottom</div>
+        <div class="box padding-left">Padding Left</div>
+
+        <!-- Box 36 -->
+        <div class="box width-100">Width 100%</div>
+        <div class="box height-150">Height 150px</div>
+
+        <!-- Box 37 -->
+        <div class="box min-width">Min Width 200px</div>
+        <div class="box max-width">Max Width 500px</div>
+
+        <!-- Box 38 -->
+        <div class="box min-height">Min Height 100px</div>
+        <div class="box max-height">Max Height 400px</div>
+    </div>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etiquetas</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            color: #333;
+        }
+
+        h1 {
+            width: 100%;
+            text-align: center;
+            font-size: 2.5rem;
+            color: #4a4e69;
+            margin-bottom: 40px;
+            font-weight: bold;
+            font-family: 'Arial', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 3px solid #9a8c98;
+            padding-bottom: 10px;
+        }
+
+        /* Grid Container for Boxes */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Dos columnas */
+            gap: 20px;
+            width: 100%;
+            max-width: 900px; /* Ajuste de ancho máximo */
+        }
+
+        /* Estilo de los cuadros */
+        .box {
+            padding: 25px;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #fff;
+            background-color: #6b705c;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Estilos específicos para cada efecto */
+        .ease-in {
+            transition-timing-function: ease-in;
+            transition: transform 0.5s;
+        }
+        .ease-in:hover {
+            transform: scale(1.1);
+        }
+        .yellow-bg {
+            background-color: #ffdd57;
+            color: #333;
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+        }
+        .pink-border {
+            border: 3px solid #ffadad;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .underline {
+            text-decoration: underline;
+        }
+        .uppercase {
+            text-transform: uppercase;
+        }
+        .box-shadow {
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+        }
+        .opacity {
+            opacity: 0.75;
+        }
+        .font-roboto {
+            font-family: 'Roboto', sans-serif;
+        }
+        .small-font {
+            font-size: 0.85rem;
+        }
+        .font-weight {
+            font-weight: 700;
+        }
+        .italic {
+            font-style: italic;
+        }
+        .text-ellipsis {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .underline-yellow {
+            text-decoration: underline;
+            text-decoration-color: yellow;
+        }
+        .underline-dotted {
+            text-decoration-style: dotted;
+        }
+        .underline-thick {
+            text-decoration-thickness: 3px;
+        }
+        .align-last-right {
+            text-align-last: right;
+        }
+        .justify-text {
+            text-align: justify;
+        }
+        .line-break {
+            line-break: anywhere;
+        }
+        .word-break {
+            word-break: break-all;
+        }
+        .rotate {
+            transform: rotate(45deg);
+            background-color: #b5838d;
+        }
+        .width-transition {
+            transition: width 2s;
+        }
+        .width-transition:hover {
+            width: 100%;
+        }
+        .bg-transition {
+            transition-property: background-color;
+        }
+        .bg-transition:hover {
+            background-color: #6d6875;
+        }
+        .transition-delay {
+            transition: background-color 0.5s ease;
+            transition-delay: 0.2s;
+        }
+        .transition-delay:hover {
+            background-color: #ffb4a2;
+        }
+        .spin-animation {
+            animation: spin 2s linear infinite;
+            background-color: #c9ada7;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0); }
+            100% { transform: rotate(360deg); }
+        }
+        .short-duration {
+            animation-duration: 0.3s;
+        }
+        .animation-delay {
+            animation: spin 2s linear infinite;
+            animation-delay: 0.5s;
+        }
+        .infinite-animation {
+            animation: bounce 1s infinite;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        .alternate-animation {
+            animation: slide 2s alternate infinite;
+        }
+        @keyframes slide {
+            from { transform: translateX(0); }
+            to { transform: translateX(30px); }
+        }
+        .fill-mode-animation {
+            animation: fadeIn 1s forwards;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .paused-animation {
+            animation: spin 2s linear paused;
+        }
+        .transform-origin {
+            transform: rotate(45deg);
+            transform-origin: center;
+            background-color: #b5838d;
+        }
+        .scale {
+            transform: scale(1.5);
+        }
+        .rotate-90 {
+            transform: rotate(90deg);
+        }
+        .skewX {
+            transform: skewX(6deg);
+        }
+        .translateX {
+            transform: translateX(-4px);
+        }
+        .perspective {
+            perspective: 500px;
+            transform: rotateY(20deg);
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+            animation: spin 2s infinite;
+        }
+        .border-radius {
+            border-radius: 8px;
+        }
+        .border-width {
+            border: 4px solid #ffadad;
+        }
+        .border-style {
+            border: 2px dashed #ffb4a2;
+        }
+        .border-collapse {
+            display: table;
+            border-collapse: collapse;
+        }
+        .border-spacing {
+            display: table;
+            border-spacing: 10px;
+        }
+        .outline-none {
+            outline: none;
+        }
+        .overflow-hidden {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .overflow-x-hidden {
+            overflow-x: hidden;
+        }
+        .overflow-y-hidden {
+            overflow-y: hidden;
+            height: 50px;
+        }
+        .z-index {
+            position: relative;
+            z-index: 10;
+            background-color: #ff6b6b;
+        }
+        .pointer-events-none {
+            pointer-events: none;
+        }
+        .resize-none {
+            resize: none;
+            overflow: hidden;
+        }
+        .cursor-pointer {
+            cursor: pointer;
+        }
+        .user-select-none {
+            user-select: none;
+        }
+        .filter-grayscale {
+            filter: grayscale(50%);
+        }
+        .backdrop-blur {
+            backdrop-filter: blur(10px);
+            background-color: rgba(107, 112, 92, 0.5);
+        }
+        .blend-screen {
+            background-color: #fcbf49;
+            mix-blend-mode: screen;
+        }
+        .clip-path {
+            clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+        }
+        .will-change {
+            will-change: transform;
+            transition: transform 0.3s ease-in-out;
+        }
+        .isolation-isolate {
+            isolation: isolate;
+            background-color: #6d6875;
+        }
+
+        /* Nuevas etiquetas */
+        .shape-outside {
+            shape-outside: circle(50%);
+            float: left;
+            width: 150px;
+            height: 150px;
+            background-color: #8d99ae;
+            border-radius: 50%;
+        }
+        .margin {
+            margin: 16px;
+            background-color: #ff6b6b;
+        }
+        .margin-top {
+            margin-top: 32px;
+            background-color: #fcbf49;
+        }
+        .margin-right {
+            margin-right: 48px;
+            background-color: #6b705c;
+        }
+        .margin-bottom {
+            margin-bottom: 64px;
+            background-color: #b5838d;
+        }
+        .margin-left {
+            margin-left: 80px;
+            background-color: #c9ada7;
+        }
+        .padding {
+            padding: 16px;
+            background-color: #f4f4f9;
+        }
+        .padding-top {
+            padding-top: 12px;
+            background-color: #d4a5a5;
+        }
+        .padding-right {
+            padding-right: 18px;
+            background-color: #6b705c;
+        }
+        .padding-bottom {
+            padding-bottom: 24px;
+            background-color: #fcbf49;
+        }
+        .padding-left {
+            padding-left: 30px;
+            background-color: #ffdd57;
+        }
+        .width-100 {
+            width: 100%;
+            background-color: #ff6b6b;
+        }
+        .height-150 {
+            height: 150px;
+            background-color: #6b705c;
+        }
+        .min-width {
+            min-width: 200px;
+            background-color: #f4f4f9;
+        }
+        .max-width {
+            max-width: 500px;
+            background-color: #fcbf49;
+        }
+        .min-height {
+            min-height: 100px;
+            background-color: #ffadad;
+        }
+        .max-height {
+            max-height: 400px;
+            background-color: #b5838d;
+        }
+    </style>
+</head>
+<body>
+   
+    <div class="grid-container">
+        <!-- Box 1 -->
+        <div class="box ease-in">Transition with ease-in</div>
+        <div class="box yellow-bg">Yellow Background Box</div>
+
+        <!-- Box 2 -->
+        <div class="box text-shadow">Text Shadow Effect</div>
+        <div class="box pink-border">Pink Border Box</div>
+
+        <!-- Box 3 -->
+        <div class="box text-right">Right-aligned Text</div>
+        <div class="box underline">Underlined Text</div>
+
+        <!-- Box 4 -->
+        <div class="box uppercase">Uppercase Text</div>
+        <div class="box box-shadow">Box with Shadow</div>
+
+        <!-- Box 5 -->
+        <div class="box opacity">Box with Opacity</div>
+        <div class="box font-roboto">Roboto Font</div>
+
+        <!-- Box 6 -->
+        <div class="box small-font">Small Font</div>
+        <div class="box font-weight">Bold Font Weight</div>
+
+        <!-- Box 7 -->
+        <div class="box italic">Italic Text</div>
+        <div class="box text-ellipsis">Text Ellipsis Overflow</div>
+
+        <!-- Box 8 -->
+        <div class="box underline-yellow">Underlined Yellow Text</div>
+        <div class="box underline-dotted">Dotted Underlined Text</div>
+
+        <!-- Box 9 -->
+        <div class="box underline-thick">Thick Underlined Text</div>
+        <div class="box align-last-right">Right-aligned Last Line</div>
+
+        <!-- Box 10 -->
+        <div class="box justify-text">Justified Text</div>
+        <div class="box line-break">Line Break Text</div>
+
+        <!-- Box 11 -->
+        <div class="box word-break">Word Break Effect</div>
+        <div class="box rotate">Rotated Box</div>
+
+        <!-- Box 12 -->
+        <div class="box width-transition">Width Transition on Hover</div>
+        <div class="box bg-transition">Background Color Transition</div>
+
+        <!-- Box 13 -->
+        <div class="box transition-delay">Transition Delay</div>
+        <div class="box spin-animation">Spin Animation</div>
+
+        <!-- Box 14 -->
+        <div class="box short-duration">Short Duration Animation</div>
+        <div class="box animation-delay">Animation Delay</div>
+
+        <!-- Box 15 -->
+        <div class="box infinite-animation">Infinite Animation</div>
+        <div class="box alternate-animation">Alternate Animation</div>
+
+        <!-- Box 16 -->
+        <div class="box fill-mode-animation">Fill Mode Animation</div>
+        <div class="box paused-animation">Paused Animation</div>
+
+        <!-- Box 17 -->
+        <div class="box transform-origin">Transform Origin</div>
+        <div class="box scale">Scale Transformation</div>
+
+        <!-- Box 18 -->
+        <div class="box rotate-90">90° Rotation</div>
+        <div class="box skewX">Skewed Box</div>
+
+        <!-- Box 19 -->
+        <div class="box translateX">Translated Box</div>
+        <div class="box perspective">Perspective Box</div>
+
+        <!-- Box 20 -->
+        <div class="box backface-hidden">Backface Hidden</div>
+        <div class="box border-radius">Border Radius</div>
+
+        <!-- Box 21 -->
+        <div class="box border-width">Border Width</div>
+        <div class="box border-style">Border Style</div>
+
+        <!-- Box 22 -->
+        <div class="box border-collapse">Border Collapse</div>
+        <div class="box border-spacing">Border Spacing</div>
+
+        <!-- Box 23 -->
+        <div class="box outline-none">No Outline</div>
+        <div class="box overflow-hidden">Overflow Hidden</div>
+
+        <!-- Box 24 -->
+        <div class="box overflow-x-hidden">Overflow X Hidden</div>
+        <div class="box overflow-y-hidden">Overflow Y Hidden</div>
+
+        <!-- Box 25 -->
+        <div class="box z-index">Z-index</div>
+        <div class="box pointer-events-none">Pointer Events None</div>
+
+        <!-- Box 26 -->
+        <div class="box resize-none">Resize None</div>
+        <div class="box cursor-pointer">Cursor Pointer</div>
+
+        <!-- Box 27 -->
+        <div class="box user-select-none">User Select None</div>
+        <div class="box filter-grayscale">Grayscale Filter</div>
+
+        <!-- Box 28 -->
+        <div class="box backdrop-blur">Backdrop Blur</div>
+        <div class="box blend-screen">Blend Mode Screen</div>
+
+        <!-- Box 29 -->
+        <div class="box clip-path">Clip Path</div>
+        <div class="box will-change">Will Change</div>
+
+        <!-- Box 30 -->
+        <div class="box isolation-isolate">Isolation Isolate</div>
+        <div class="box shape-outside">Shape Outside</div>
+
+        <!-- Box 31 -->
+        <div class="box margin">Margin</div>
+        <div class="box margin-top">Margin Top</div>
+
+        <!-- Box 32 -->
+        <div class="box margin-right">Margin Right</div>
+        <div class="box margin-bottom">Margin Bottom</div>
+
+        <!-- Box 33 -->
+        <div class="box margin-left">Margin Left</div>
+        <div class="box padding">Padding</div>
+
+        <!-- Box 34 -->
+        <div class="box padding-top">Padding Top</div>
+        <div class="box padding-right">Padding Right</div>
+
+        <!-- Box 35 -->
+        <div class="box padding-bottom">Padding Bottom</div>
+        <div class="box padding-left">Padding Left</div>
+
+        <!-- Box 36 -->
+        <div class="box width-100">Width 100%</div>
+        <div class="box height-150">Height 150px</div>
+
+        <!-- Box 37 -->
+        <div class="box min-width">Min Width 200px</div>
+        <div class="box max-width">Max Width 500px</div>
+
+        <!-- Box 38 -->
+        <div class="box min-height">Min Height 100px</div>
+        <div class="box max-height">Max Height 400px</div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
